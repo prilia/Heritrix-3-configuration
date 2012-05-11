@@ -48,7 +48,7 @@ metadata.description=Default H3 configuration adaptation to H1 webarchiv.cz conf
 
  <!-- overrides from declared <prop> elements, more easily allowing
       multiline values or even declared beans -->
- <bean id="longerOverrides" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+<!-- <bean id="longerOverrides" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
   <property name="properties">
    <props>
     <prop key="seeds.textSource.value">
@@ -60,7 +60,7 @@ http://example.example/example
    </props>
   </property>
  </bean>
-
+-->
  <!-- CRAWL METADATA: including identification of crawler/operator -->
  <bean id="metadata" class="org.archive.modules.CrawlMetadata" autowire="byName">
        <property name="operatorContactUrl" value="[see override above]"/>
@@ -80,6 +80,7 @@ http://example.example/example
       ConfigString allows simple, inline specification of a moderate
       number of seeds; see below comment for example of using an
       arbitrarily-large external file. -->
+<!-- 
  <bean id="seeds" class="org.archive.modules.seeds.TextSeedModule">
      <property name="textSource">
       <bean class="org.archive.spring.ConfigString">
@@ -90,14 +91,18 @@ http://example.example/example
        </property>
       </bean>
      </property>
+-->
 <!-- <property name='sourceTagSeeds' value='false'/> -->
 <!-- <property name='blockAwaitingSeedLines' value='-1'/> -->
+
+ <!-- 
  </bean>
+-->
  
  <!-- SEEDS ALTERNATE APPROACH: specifying external seeds.txt file in
       the job directory, similar to the H1 approach. 
       Use either the above, or this, but not both. -->
- <!-- 
+  
  <bean id="seeds" class="org.archive.modules.seeds.TextSeedModule">
   <property name="textSource">
    <bean class="org.archive.spring.ConfigFile">
@@ -107,7 +112,7 @@ http://example.example/example
   <property name='sourceTagSeeds' value='false'/>
   <property name='blockAwaitingSeedLines' value='-1'/>
  </bean>
-  -->
+  
  
  <bean id="acceptSurts" class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
   <!-- <property name="decision" value="ACCEPT"/> -->
