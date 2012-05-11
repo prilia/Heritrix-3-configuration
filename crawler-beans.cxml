@@ -38,7 +38,7 @@
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
 metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
-metadata.jobName=Serials
+metadata.jobName=Serials 2012
 metadata.description=Default H3 configuration adaptation to H1 webarchiv.cz configuration
 
 ##..more?..##
