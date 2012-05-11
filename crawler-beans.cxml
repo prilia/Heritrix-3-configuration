@@ -37,9 +37,9 @@
 # This Properties map is specified in the Java 'property list' text format
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
-metadata.operatorContactUrl=ENTER_AN_URL_WITH_YOUR_CONTACT_INFO_HERE_FOR_WEBMASTERS_AFFECTED_BY_YOUR_CRAWL
-metadata.jobName=basic
-metadata.description=Basic crawl starting with useful defaults
+metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
+metadata.jobName=Serials
+metadata.description=Default H3 configuration adaptation to H1 webarchiv.cz configuration
 
 ##..more?..##
    </value>
