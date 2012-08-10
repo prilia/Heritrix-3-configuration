@@ -203,7 +203,22 @@ http://example.example/example
   
  <!-- CANDIDATE CHAIN --> 
  <!-- first, processors are declared as top-level named beans -->
- <bean id="candidateScoper" class="org.archive.crawler.prefetch.CandidateScoper">
+ <!-- CANDIDATE CHAIN --> 
+ <!-- first, processors are declared as top-level named beans -->
+ <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
+	 <property name="enabled" value="true" />
+	<!-- Each crawler must have ovn name -->
+	 <property name="localName" value="Crawler00" />
+	<!-- Not exactly sure where this path will be realitve to, and if i will rsync crawlers or use shared drive. -->
+	 <property name="diversionDir" value="0/letsee/${launchId}/pre-fetch-diversions" />
+	 <property name="checkUri" value="true" />
+	 <property name="checkOutlinks" value="false"/>
+	 <property name="rotationDigits" value="10" />
+	<!-- Dont forget to mention how many crawlers will join a party --> 
+	 <property name="crawlerCount" value="2" />
+ </bean> 
+
+<bean id="candidateScoper" class="org.archive.crawler.prefetch.CandidateScoper">
  </bean>
  <bean id="preparer" class="org.archive.crawler.prefetch.FrontierPreparer">
   <!-- <property name="preferenceDepthHops" value="-1" /> -->
