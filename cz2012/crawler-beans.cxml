@@ -246,6 +246,8 @@ http://example.example/example
    <list>
     <!-- apply scoping rules to each individual candidate URI... -->
     <ref bean="candidateScoper"/>
+    <!-- Turning on distrubted crawling-->
+    <ref bean="hashCrawlMapper"/>
     <!-- ...then prepare those ACCEPTed to be enqueued to frontier. -->
     <ref bean="preparer"/>
    </list>
