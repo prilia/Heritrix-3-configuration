@@ -226,13 +226,13 @@ http://example.example/example
  </bean>
  <bean id="preparer" class="org.archive.crawler.prefetch.FrontierPreparer">
   <!-- <property name="preferenceDepthHops" value="-1" /> -->
-  <!-- <property name="preferenceEmbedHops" value="1" /> -->
+  	<property name="preferenceEmbedHops" value="1" />
   <!-- <property name="canonicalizationPolicy"> 
         <ref bean="canonicalizationPolicy" />
        </property> -->
-  <!-- <property name="queueAssignmentPolicy"> 
-        <ref bean="queueAssignmentPolicy" />
-       </property> -->
+  	<property name="queueAssignmentPolicy"> 
+         <ref bean="queueAssignmentPolicy" /> 
+	</property>
   <!-- <property name="uriPrecedencePolicy"> 
         <ref bean="uriPrecedencePolicy" />
        </property> -->
