@@ -230,9 +230,9 @@ http://example.example/example
   <!-- <property name="canonicalizationPolicy"> 
         <ref bean="canonicalizationPolicy" />
        </property> -->
-  	<property name="queueAssignmentPolicy"> 
-         <ref bean="queueAssignmentPolicy" /> 
-	</property>
+  <!-- <property name="queueAssignmentPolicy"> 
+        <ref bean="queueAssignmentPolicy" />
+       </property> -->
   <!-- <property name="uriPrecedencePolicy"> 
         <ref bean="uriPrecedencePolicy" />
        </property> -->
