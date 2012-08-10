@@ -212,7 +212,7 @@ http://example.example/example
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="true" />
 	<!-- Each crawler must have ovn number, starting 0-->
-	 <property name="localName" value="0" />
+	 <property name="localName" value="1" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
 	 <property name="diversionDir" value="/mnt/archives/archive12/${launchId}/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
@@ -362,8 +362,8 @@ http://example.example/example
  <!-- first, processors are declared as top-level named beans  -->
  <bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">
   <!-- <property name="compress" value="true" /> -->
-  <property name="prefix" value="CZ=2012-TEST" />
-  <property name="suffix" value="${HOSTNAME}" />
+  <property name="prefix" value="CZ-2012-TEST" />
+  <!-- <property name="suffix" value="${HOSTNAME}" /> -->
   <property name="maxFileSizeBytes" value="100000000" />
   <property name="poolMaxActive" value="5" />
   <!-- <property name="MaxWaitForIdleMs" value="500" /> -->
