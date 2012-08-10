@@ -38,8 +38,13 @@
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
 metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
-metadata.jobName=Serials 2012
-metadata.description=Default H3 configuration adaptation to H1 webarchiv.cz configuration
+metadata.jobName=CZ Domain Crawl Testing
+metadata.description=Distributed crawling test
+metadata.operator=Rudolf
+metadata.operatorFrom=rudolf.kreibich@nkp.cz
+metadata.organization=Czech National Library
+metadata.audience=Webarchiv.cz users
+metadata.userAgentTemplate=Mozilla/5.0 (compatible; heritrix/@VERSION@ +@OPERATOR_CONTACT_URL@)
 
 ##..more?..##
    </value>
@@ -67,12 +72,11 @@ http://example.example/example
        <property name="jobName" value="[see override above]"/>
        <property name="description" value="[see override above]"/>
   <!-- <property name="robotsPolicyName" value="obey"/> -->
-  <!-- <property name="operator" value=""/> -->
-  <!-- <property name="operatorFrom" value=""/> -->
-  <!-- <property name="organization" value=""/> -->
-  <!-- <property name="audience" value=""/> -->
-  <!-- <property name="userAgentTemplate" 
-         value="Mozilla/5.0 (compatible; heritrix/@VERSION@ +@OPERATOR_CONTACT_URL@)"/> -->
+	<property name="operator" value="[see override above]"/> 
+  	<property name="operatorFrom" value="[see override above]"/>
+  	<property name="organization" value="[see override above]"/>
+  	<property name="audience" value="[see override above]"/> 
+  	<property name="userAgentTemplate" value="[see override above]"/>
        
  </bean>
  
@@ -207,9 +211,9 @@ http://example.example/example
  <!-- first, processors are declared as top-level named beans -->
  <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="true" />
-	<!-- Each crawler must have ovn name -->
-	 <property name="localName" value="Crawler00" />
-	<!-- Not exactly sure where this path will be realitve to, and if i will rsync crawlers or use shared drive. -->
+	<!-- Each crawler must have ovn number, starting 0-->
+	 <property name="localName" value="0" />
+	<!-- This file will be rsynced among crawlers or be shared. -->
 	 <property name="diversionDir" value="${launchId}/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
 	 <property name="checkOutlinks" value="false"/>
