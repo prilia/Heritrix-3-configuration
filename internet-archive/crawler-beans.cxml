@@ -210,7 +210,7 @@ http://example.example/example
 	<!-- Each crawler must have ovn name -->
 	 <property name="localName" value="Crawler00" />
 	<!-- Not exactly sure where this path will be realitve to, and if i will rsync crawlers or use shared drive. -->
-	 <property name="diversionDir" value="0/letsee/${launchId}/pre-fetch-diversions" />
+	 <property name="diversionDir" value="${launchId}/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
 	 <property name="checkOutlinks" value="false"/>
 	 <property name="rotationDigits" value="10" />
