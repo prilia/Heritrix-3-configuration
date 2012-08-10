@@ -207,9 +207,9 @@ http://example.example/example
   
  <!-- CANDIDATE CHAIN --> 
  <!-- first, processors are declared as top-level named beans -->
- <!-- CANDIDATE CHAIN --> 
- <!-- first, processors are declared as top-level named beans -->
- <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
+ 
+ <!-- Distributed crawling specific bean -->
+<bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="true" />
 	<!-- Each crawler must have ovn number, starting 0-->
 	 <property name="localName" value="0" />
