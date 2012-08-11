@@ -214,7 +214,7 @@ http://example.example/example
 	<!-- Each crawler must have ovn number, starting 0-->
 	 <property name="localName" value="1" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
-	 <property name="diversionDir" value="/mnt/archives/archive12/${launchId}/pre-fetch-diversions" />
+	 <property name="diversionDir" value="/mnt/archives/archive12/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
 	 <property name="checkOutlinks" value="false"/>
 	 <property name="rotationDigits" value="10" />
