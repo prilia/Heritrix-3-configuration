@@ -491,15 +491,6 @@ http://example.example/example
  </property>
 </bean>
 
-<bean id='smallBudget' class='org.archive.spring.Sheet'>
- <property name='map'>
-  <map>
-   <entry key='frontier.balanceReplenishAmount' value='20'/>
-   <entry key='frontier.queueTotalBudget' value='100'/>
-  </map>
- </property>
-</bean>
-
 <bean id="rejectList" class='org.archive.spring.Sheet'>
 <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule"> 
  <property name="decision" value="REJECT"/>
