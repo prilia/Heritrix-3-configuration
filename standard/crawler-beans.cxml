@@ -87,6 +87,26 @@ http://example.example/example
        
  </bean>
  
+<!-- DEDUPLICATION: Configure persistent URI history storage
+URL: https://webarchive.jira.com/wiki/display/Heritrix/Duplication+Reduction+Processors
+These settings should be added to any crawl that is to provide historical-fetch information for future de-duplication (such as the first of two crawls, or every crawl of an ongoing series).
+-->
+<bean id="fetchHistoryProcessor" class="org.archive.modules.recrawl.FetchHistoryProcessor">
+    <!-- <property name="historyLength" value="2" /> -->
+</bean>
+<bean id="persistStoreProcessor" class="org.archive.modules.recrawl.PersistStoreProcessor">
+</bean>
+<!-- DEDUPLICATION: As configured here, the URI history info will be loaded from the crawl's default BDB environment (as managed by BdbModule, residing on disk in the 'state' directory).-->
+<!-- <bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
+</bean>
+-->
+<!-- DEDUPLICATION: Laad another state directory, not current one or suffer the consequences: error message -->
+<!--
+<bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
+ <property name="preloadSource" value="/Users/me/Documents/heritrix-3.0.0-SNAPSHOT/jobs/originalCrawl/state"/>
+</bean>
+-->
+
  <!-- SEEDS: crawl starting points 
       ConfigString allows simple, inline specification of a moderate
       number of seeds; see below comment for example of using an
@@ -275,7 +295,7 @@ http://example.example/example
  
  <!-- Distributed crawling specific bean -->
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
-	 <property name="enabled" value="true" />
+	 <property name="enabled" value="false" />
 	<!-- Each crawler must have ovn number, starting 0-->
 	 <property name="localName" value="0" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
@@ -284,7 +304,7 @@ http://example.example/example
 	 <property name="checkOutlinks" value="false"/>
 	 <property name="rotationDigits" value="10" />
 	<!-- Dont forget to mention how many crawlers will join a party --> 
-	 <property name="crawlerCount" value="6" />
+	 <property name="crawlerCount" value="2" />
  </bean> 
 
 <bean id="candidateScoper" class="org.archive.crawler.prefetch.CandidateScoper">
@@ -404,11 +424,17 @@ http://example.example/example
     <ref bean="preselector"/>
     <!-- ...then verify or trigger prerequisite URIs fetched, allow crawling... -->
     <ref bean="preconditions"/>
+    <!-- DEDUPLICATION - for Crawls enjoying BDB fetch history -->
+    <!-- Turn on when needed! for 2nd Crawls..
+    <ref bean="persistLoadProcessor"/>
+    -->
     <!-- ...fetch if DNS URI... -->
     <ref bean="fetchDns"/>
     <!-- <ref bean="fetchWhois"/> -->
     <!-- ...fetch if HTTP URI... -->
     <ref bean="fetchHttp"/>
+    <!-- DEDUPLICATION - creating fetch history record -->
+    <ref bean="fetchHistoryProcessor" />
     <!-- ...extract outlinks from HTTP headers... -->
     <ref bean="extractorHttp"/>
     <!-- ...extract outlinks from HTML content... -->
@@ -465,6 +491,8 @@ http://example.example/example
    <list>
     <!-- write to aggregate archival files... -->
     <ref bean="warcWriter"/>
+    <!-- DEDUPLICATION -->
+    <ref bean="persistStoreProcessor" />
     <!-- ...send each outlink candidate URI to CandidateChain, 
          and enqueue those ACCEPTed to the frontier... -->
     <ref bean="candidates"/>
@@ -489,8 +517,8 @@ http://example.example/example
  <!-- FRONTIER: Record of all URIs discovered and queued-for-collection -->
  <bean id="frontier" 
    class="org.archive.crawler.frontier.BdbFrontier">
-  <property name="queueTotalBudget" value="6000" /> 
-  <property name="balanceReplenishAmount" value="3000" />
+  <property name="queueTotalBudget" value="15000" /> 
+  <property name="balanceReplenishAmount" value="5000" />
   <!-- <property name="errorPenaltyAmount" value="100" /> -->
   <!-- <property name="precedenceFloor" value="255" /> -->
   <!-- <property name="queuePrecedencePolicy">
