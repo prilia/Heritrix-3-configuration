@@ -967,10 +967,10 @@ These settings should be added to any crawl that is to provide historical-fetch 
       Running job will watch directory for new files with URIs, 
       scripts, and other data to be processed during a crawl. -->
  <bean id="actionDirectory" class="org.archive.crawler.framework.ActionDirectory">
-  <!-- <property name="actionDir" value="action" /> -->
-  <!-- <property name="doneDir" value="${launchId}/actions-done" /> -->
-  <!-- <property name="initialDelaySeconds" value="10" /> -->
-  <!-- <property name="delaySeconds" value="30" /> -->
+  <property name="actionDir" value="action" />
+  <property name="doneDir" value="${launchId}/actions-done" />
+  <property name="initialDelaySeconds" value="10" />
+  <property name="delaySeconds" value="30" />
  </bean> 
  
  <!--  CRAWLLIMITENFORCER: stops crawl when it reaches configured limits -->
