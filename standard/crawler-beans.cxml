@@ -38,12 +38,12 @@
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
 metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
-metadata.jobName=Serials 2012-08 V1M V2M
-metadata.description=Pravidelna sklizen - v Heretrirxu 3
-metadata.operator=Rudolf
-metadata.operatorFrom=rudolf.kreibich@nkp.cz
-metadata.organization=Czech National Library
-metadata.audience=Webarchiv.cz users
+metadata.jobName=ArchiveIt 2012-08 a zpetne 07
+metadata.description=ArchiveIT novych seminek s dlouhou frekvenci za Cerven a Cervenec
+metadata.operator=Rudolf Kreibich
+metadata.operatorFrom=webarchiv@nkp.cz
+metadata.organization=National Library of the Czech Republic - WebArchiv
+metadata.audience=WebArchiv Users
 metadata.userAgentTemplate=Mozilla/5.0 (compatible; heritrix/@VERSION@ +@OPERATOR_CONTACT_URL@)
 metadata.robotsPolicyName=ignore
 
@@ -92,14 +92,13 @@ URL: https://webarchive.jira.com/wiki/display/Heritrix/Duplication+Reduction+Pro
 These settings should be added to any crawl that is to provide historical-fetch information for future de-duplication (such as the first of two crawls, or every crawl of an ongoing series).
 -->
 <bean id="fetchHistoryProcessor" class="org.archive.modules.recrawl.FetchHistoryProcessor">
-    <!-- <property name="historyLength" value="2" /> -->
+    <property name="historyLength" value="24" />
 </bean>
 <bean id="persistStoreProcessor" class="org.archive.modules.recrawl.PersistStoreProcessor">
 </bean>
 <!-- DEDUPLICATION: As configured here, the URI history info will be loaded from the crawl's default BDB environment (as managed by BdbModule, residing on disk in the 'state' directory).-->
-<!-- <bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
+<bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
 </bean>
--->
 <!-- DEDUPLICATION: Laad another state directory, not current one or suffer the consequences: error message -->
 <!--
 <bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
@@ -425,9 +424,8 @@ These settings should be added to any crawl that is to provide historical-fetch 
     <!-- ...then verify or trigger prerequisite URIs fetched, allow crawling... -->
     <ref bean="preconditions"/>
     <!-- DEDUPLICATION - for Crawls enjoying BDB fetch history -->
-    <!-- Turn on when needed! for 2nd Crawls..
+    <!-- Turn on when needed! for 2nd Crawls.. -->
     <ref bean="persistLoadProcessor"/>
-    -->
     <!-- ...fetch if DNS URI... -->
     <ref bean="fetchDns"/>
     <!-- <ref bean="fetchWhois"/> -->
@@ -453,9 +451,9 @@ These settings should be added to any crawl that is to provide historical-fetch 
  <!-- first, processors are declared as top-level named beans  -->
  <bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">
   <!-- <property name="compress" value="true" /> -->
-  <property name="prefix" value="SERIALS-2012-08-1M_2M" />
+  <property name="prefix" value="ArchiveIt-2012-08" />
   <!-- <property name="suffix" value="${HOSTNAME}" /> -->
-  <property name="maxFileSizeBytes" value="100000000" />
+  <property name="maxFileSizeBytes" value="1000000000" />
   <property name="poolMaxActive" value="5" />
   <!-- <property name="MaxWaitForIdleMs" value="500" /> -->
   <!-- <property name="skipIdenticalDigests" value="false" /> -->
@@ -463,7 +461,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
   <!-- <property name="directory" value="${launchId}" /> -->
   <property name="storePaths">
         <list>
-         <value>/mnt/archives/archive12/serials/Serials-2012-08-1M_2M</value>
+         <value>/mnt/archives/archive12/ArchiveIt-2012-08</value>
         </list>
        </property>
   <!-- <property name="writeRequests" value="true" /> -->
