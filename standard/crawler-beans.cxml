@@ -161,12 +161,17 @@ These settings should be added to any crawl that is to provide historical-fetch 
          </property> 
         </bean>
        </property> -->
+	<property name="surtsSource">
+           <bean class="org.archive.spring.ConfigFile">
+            <property name="path" value="surts.txt" />
+           </bean>
+          </property> 
  </bean>
 
  <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
       important because last decision returned other than 'NONE' wins. -->
  <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
-  <!-- <property name="logToFile" value="false" /> -->
+  <property name="logToFile" value="true" />
   <property name="rules">
    <list>
     <!-- Begin by REJECTing all... -->
@@ -185,14 +190,15 @@ These settings should be added to any crawl that is to provide historical-fetch 
     <!-- ...but REJECT those from a configurable (initially empty) set of REJECT SURTs... -->
     <bean class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
           <property name="decision" value="REJECT"/>
-          <property name="seedsAsSurtPrefixes" value="true"/>
+          <property name="seedsAsSurtPrefixes" value="false"/>
           <property name="surtsDumpFile" value="${launchId}/negative-surts.dump" /> 
-	  <property name="surtsSourceFile" value="negative-surts.txt"/> 
-<!-- <property name="surtsSource">
+<!--	  <property name="surtsSourceFile" value="negative-surts.txt"/> 
+-->	  
+<property name="surtsSource">
            <bean class="org.archive.spring.ConfigFile">
             <property name="path" value="negative-surts.txt" />
            </bean>
-          </property> -->
+          </property>
     </bean>
     <!-- ...and REJECT those from a configurable (initially empty) set of URI regexes... -->
     <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
@@ -296,7 +302,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="false" />
 	<!-- Each crawler must have ovn number, starting 0-->
-	 <property name="localName" value="0" />
+	 <property name="localName" value="1" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
 	 <property name="diversionDir" value="/mnt/archives/archive12/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
@@ -686,6 +692,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
 </bean>
 
 <!-- CALENDAR TRAPS -->
+<!-- Noah navrhl vytvořit tohle s vlasním id a přiradit hodnoty, tohle by nemuselo fungovat správně-->
 <bean id="rejectCalendars" class='org.archive.spring.Sheet'>
  <property name='map'>
   <map>
