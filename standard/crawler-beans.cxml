@@ -38,8 +38,8 @@
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
 metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
-metadata.jobName=ArchiveIt 2012-08 a zpetne 07
-metadata.description=ArchiveIT novych seminek s dlouhou frekvenci za Cerven a Cervenec
+metadata.jobName=Serials 2012-09 V1M V6M
+metadata.description=Pravidelná sklizeň frekvence 12xMěsíčně a 2xRočně
 metadata.operator=Rudolf Kreibich
 metadata.operatorFrom=webarchiv@nkp.cz
 metadata.organization=National Library of the Czech Republic - WebArchiv
@@ -300,7 +300,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
  
  <!-- Distributed crawling specific bean -->
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
-	 <property name="enabled" value="false" />
+	 <property name="enabled" value="true" />
 	<!-- Each crawler must have ovn number, starting 0-->
 	 <property name="localName" value="0" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
@@ -457,7 +457,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
  <!-- first, processors are declared as top-level named beans  -->
  <bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">
   <!-- <property name="compress" value="true" /> -->
-  <property name="prefix" value="ArchiveIt-2012-08" />
+  <property name="prefix" value="Serials-2012-09-1M_6M" />
   <!-- <property name="suffix" value="${HOSTNAME}" /> -->
   <property name="maxFileSizeBytes" value="1000000000" />
   <property name="poolMaxActive" value="5" />
@@ -467,7 +467,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
   <!-- <property name="directory" value="${launchId}" /> -->
   <property name="storePaths">
         <list>
-         <value>/mnt/archives/archive12/ArchiveIt-2012-08</value>
+         <value>/mnt/archives/archive12/serials/Serials-2012-09-1M_6M</value>
         </list>
        </property>
   <!-- <property name="writeRequests" value="true" /> -->
