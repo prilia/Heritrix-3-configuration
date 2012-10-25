@@ -302,7 +302,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="true" />
 	<!-- Each crawler must have ovn number, starting 0-->
-	 <property name="localName" value="1" />
+	 <property name="localName" value="0" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
 	 <property name="diversionDir" value="/mnt/archives/archive12/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
@@ -467,7 +467,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
   <!-- <property name="directory" value="${launchId}" /> -->
   <property name="storePaths">
         <list>
-         <value>/mnt/archives/archive12/serials/Serials-2012-09-1M_6M</value>
+         <value>/mnt/archives/archive12/serials/Serials-2012-10-1M_2M</value>
         </list>
        </property>
   <!-- <property name="writeRequests" value="true" /> -->
