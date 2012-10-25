@@ -302,7 +302,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
 	 <property name="enabled" value="true" />
 	<!-- Each crawler must have ovn number, starting 0-->
-	 <property name="localName" value="0" />
+	 <property name="localName" value="1" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
 	 <property name="diversionDir" value="/mnt/archives/archive12/pre-fetch-diversions" />
 	 <property name="checkUri" value="true" />
@@ -693,6 +693,8 @@ These settings should be added to any crawl that is to provide historical-fetch 
 
 <!-- CALENDAR TRAPS -->
 <!-- Noah navrhl vytvořit tohle s vlasním id a přiradit hodnoty, tohle by nemuselo fungovat správně-->
+<!-- Staré Rudolfovo řešení -->
+<!--
 <bean id="rejectCalendars" class='org.archive.spring.Sheet'>
  <property name='map'>
   <map>
@@ -731,21 +733,26 @@ These settings should be added to any crawl that is to provide historical-fetch 
   </list>
  </property>
 </bean>
+-->
 
 <!-- Noah's way -->
 <!-- <ref bean="hostConstraintRejectRegex-0"/> -->
 <!-- and then top-level beans like so: -->
-<!--
-<bean id="hostConstraintRejectRegex-0" class="org.archive.modules.deciderules.MatchesListRegexDecideRule" autowire-candidate="false">
+
+<bean id="rejectCalendars" class="org.archive.modules.deciderules.MatchesListRegexDecideRule" autowire-candidate="false">
 	<property name="decision" value="REJECT"/>
 </bean>
 
-<bean id="hostConstraintRejectRegex-0-overlay" class="org.archive.spring.Sheet">
+<bean id="rejectCalendars-sheet" class="org.archive.spring.Sheet">
  <property name="map">
   <map>
-   <entry key="hostConstraintRejectRegex-0.regexList">
+   <entry key="rejectCalendars.regexList">
     <list>
-	<value>^.*\Qshow=ArchivedPages\E.*$</value>
+        <value>.*agronavigator.cz*/kalendar.asp\?.*</value>
+        <value>.*agroporadenstvi.cz.*/kalendar.asp\?.*</value>
+        <value>http://zbraslav\.info/kalendar-akci/.*/201[5-9]/.*</value>
+        <value>.*&amp;month:int=[0-9]{1,2}&amp;year:int=(?!(2010|2011)).*</value>
+        <value>.*knihy_prehled\.asp\?rok=201[6-9]{1}.*</value>
     </list>
    </entry>
   </map>
@@ -755,26 +762,29 @@ These settings should be added to any crawl that is to provide historical-fetch 
 <bean class="org.archive.crawler.spring.SurtPrefixesSheetAssociation">
  <property name="surtPrefixes">
   <list>
-	<value>http://(org,archive-it,</value>
+        <value>+fantasyplanet.cz</value>
+        <value>+agroporadenstvi.cz</value>
+        <value>+coena.cz</value>
+        <value>+agronavigator.cz</value>
+        <value>+zbraslav.info</value>
   </list>
  </property>
  <property name="targetSheetNames">
   <list>
-	<value>hostConstraintRejectRegex-0-overlay</value>
+	<value>rejectCalendars-sheet</value>
   </list>
  </property>
 </bean>
--->
 
 <!-- LOCAL TRAPS -->
-<bean id="rejectList" class='org.archive.spring.Sheet'>
+<bean id="rejectList" class="org.archive.modules.deciderules.MatchesListRegexDecideRule" autowire-candidate="false">
+	<property name="decision" value="REJECT" />
+</bean>
+
+<bean id="rejectList-sheet" class='org.archive.spring.Sheet'>
  <property name='map'>
   <map>
-   <entry key='scope.rules'>
-    <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-     <property name="decision" value="REJECT"/>
-     <property name="listLogicalOr" value="true" />
-     <property name="regexList">
+   <entry key='rejectList.regexList'>
       <list>
 	<value>.*/profil\.php.*</value>
 	<value>.*#comments.*</value>
@@ -864,11 +874,9 @@ These settings should be added to any crawl that is to provide historical-fetch 
 	<value>http://archiv\.cbvk\.cz/historicke_mapy.*</value>
 	<value>http://archiv\.cbvk\.cz/kramerius/.*</value>
       </list>
-     </property>
-    </bean>
    </entry>
   </map>
-</property>
+ </property>
 </bean>
 
 <bean class='org.archive.crawler.spring.SurtPrefixesSheetAssociation'>
@@ -942,7 +950,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
  </property>
  <property name='targetSheetNames'>
   <list>
-   <value>rejectList</value>
+   <value>rejectList-sheet</value>
   </list>
  </property>
 </bean>
