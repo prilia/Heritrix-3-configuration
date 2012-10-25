@@ -38,8 +38,8 @@
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
 metadata.operatorContactUrl=http://webarchiv.cz/kontakty/
-metadata.jobName=Serials 2012-09 V1M V6M
-metadata.description=Pravidelná sklizeň frekvence 12xMěsíčně a 2xRočně
+metadata.jobName=ArchiveIt 2012-10 V1M V2M
+metadata.description=Archive it novych seminek z mesicu srpen a zari
 metadata.operator=Rudolf Kreibich
 metadata.operatorFrom=webarchiv@nkp.cz
 metadata.organization=National Library of the Czech Republic - WebArchiv
@@ -99,6 +99,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
 <!-- DEDUPLICATION: As configured here, the URI history info will be loaded from the crawl's default BDB environment (as managed by BdbModule, residing on disk in the 'state' directory).-->
 <bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
 </bean>
+
 <!-- DEDUPLICATION: Laad another state directory, not current one or suffer the consequences: error message -->
 <!--
 <bean id="persistLoadProcessor" class="org.archive.modules.recrawl.PersistLoadProcessor">
@@ -300,7 +301,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
  
  <!-- Distributed crawling specific bean -->
 <bean id="hashCrawlMapper" class="org.archive.crawler.processor.HashCrawlMapper">
-	 <property name="enabled" value="true" />
+	 <property name="enabled" value="false" />
 	<!-- Each crawler must have ovn number, starting 0-->
 	 <property name="localName" value="0" />
 	<!-- This file will be rsynced among crawlers or be shared. -->
@@ -431,7 +432,9 @@ These settings should be added to any crawl that is to provide historical-fetch 
     <ref bean="preconditions"/>
     <!-- DEDUPLICATION - for Crawls enjoying BDB fetch history -->
     <!-- Turn on when needed! for 2nd Crawls.. -->
+<!--
     <ref bean="persistLoadProcessor"/>
+-->
     <!-- ...fetch if DNS URI... -->
     <ref bean="fetchDns"/>
     <!-- <ref bean="fetchWhois"/> -->
@@ -467,7 +470,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
   <!-- <property name="directory" value="${launchId}" /> -->
   <property name="storePaths">
         <list>
-         <value>/mnt/archives/archive12/serials/Serials-2012-10-1M_2M</value>
+         <value>/mnt/archives/archive12/ArchiveIt-2012-10</value>
         </list>
        </property>
   <!-- <property name="writeRequests" value="true" /> -->
