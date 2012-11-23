@@ -37,15 +37,15 @@
 # This Properties map is specified in the Java 'property list' text format
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
-metadata.jobName=Topzine TEST
-metadata.description=Test topzine.cz na funkcnost redirectu
-warcWriter.prefix=Topzine-TEST-00
-warcWriter.storePaths=/mnt/archives/archive12/testCrawls
-frontier.queueTotalBudget=5000
+metadata.jobName=Prezidentská sklizeň 2012
+metadata.description=Sklizeň zaměřená na prezidentské volby v roce 2012
+warcWriter.prefix=Prezident-2012-00
+warcWriter.storePaths=/mnt/archives/archive12/Prezident-2012
+frontier.queueTotalBudget=15000
 frontier.balanceReplenishAmount=5000
 
 # DISTRIBUTED CRAWLING - if true, check if proper localName and dont forget to mention how many crawlers will join a party.
-hashCrawlMapper.enabled=false
+hashCrawlMapper.enabled=true
 hashCrawlMapper.localName=1
 hashCrawlMapper.crawlerCount=2
 hashCrawlMapper.diversionDir=/mnt/archives/archive12/pre-fetch-diversions
@@ -353,7 +353,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
    <list>
     <!-- apply scoping rules to each individual candidate URI... -->
     <ref bean="candidateScoper"/>
-    <!-- Turning on distrubted crawling-->
+    <!-- DISTRIBUTED CRAWLING - Turning on distrubted crawling-->
     <ref bean="hashCrawlMapper"/>
     <!-- ...then prepare those ACCEPTed to be enqueued to frontier. -->
     <ref bean="preparer"/>
@@ -468,10 +468,25 @@ These settings should be added to any crawl that is to provide historical-fetch 
     <ref bean="extractorJs"/>
     <!-- ...extract outlinks from Flash content... -->
     <ref bean="extractorSwf"/>
+<!-- YOUTUBE EXTRACTION- thx to Noah -->
+    <bean id="extractorYoutubeEmbedded" class="org.archive.modules.extractor.ExtractorImpliedURI">
+	<property name="regex" value="^(http://(?:www.)?youtube.com)/(?:v|embed)/([a-zA-Z0-9_-]+).*$"/>
+	<property name="format" value="$1/watch?v=$2"/>
+    </bean>
+    <ref bean="extractorYoutubeWatchPage"/>
+    <bean id="extractorXml" class="org.archive.modules.extractor.ExtractorXML"/>
    </list>
   </property>
  </bean>
-  
+
+
+ <bean id="extractorYoutubeWatchPage" class="org.archive.modules.extractor.ExtractorImpliedURI">
+	<property name="regex" value="^(http://[^/]*\.c\.youtube\.com)/[^?]+\?(.*)$"/>
+	<property name="format" value="$1/videoplayback?$2"/>
+	<property name="enabled" value="true"/>
+ </bean>
+<!-- END OF YOUTUBE EXTRACTION -->
+
  <!-- DISPOSITION CHAIN -->
  <!-- first, processors are declared as top-level named beans  -->
  <bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">
