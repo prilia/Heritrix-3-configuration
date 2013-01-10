@@ -37,16 +37,16 @@
 # This Properties map is specified in the Java 'property list' text format
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
-metadata.jobName=Prezidentská sklizeň 2012
-metadata.description=Sklizeň zaměřená na prezidentské volby v roce 2012
-warcWriter.prefix=Prezident-2012-00
+metadata.jobName=Prezidentské sklizně 2013
+metadata.description=Sklizen zaměřená na prezidentské volby v roce 2013
+warcWriter.prefix=Prezident-2012-01
 warcWriter.storePaths=/mnt/archives/archive12/Prezident-2012
 frontier.queueTotalBudget=15000
 frontier.balanceReplenishAmount=5000
 
 # DISTRIBUTED CRAWLING - if true, check if proper localName and dont forget to mention how many crawlers will join a party.
 hashCrawlMapper.enabled=true
-hashCrawlMapper.localName=1
+hashCrawlMapper.localName=0
 hashCrawlMapper.crawlerCount=2
 hashCrawlMapper.diversionDir=/mnt/archives/archive12/pre-fetch-diversions
 
@@ -448,9 +448,7 @@ These settings should be added to any crawl that is to provide historical-fetch 
     <ref bean="preconditions"/>
     <!-- DEDUPLICATION - for Crawls enjoying BDB fetch history -->
     <!-- Turn on when needed! for 2nd Crawls.. -->
-<!--
     <ref bean="persistLoadProcessor"/>
--->
     <!-- ...fetch if DNS URI... -->
     <ref bean="fetchDns"/>
     <!-- <ref bean="fetchWhois"/> -->
